@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject private var store = ItemStore()
 
     // BUG: AppStorage does not support Optional types therefore it cannot be used to remember list selection?!
-    @AppStorage("selectedCategory") private var selectedCategory: String = "Games"
+    @AppStorage("selectedCategory") private var selectedCategory: String = ""
     @AppStorage("selectedItem") private var selectedItem: String = ""
         
     var body: some View {

@@ -11,46 +11,33 @@ import SwiftUI
 struct SidebarList: View {
     @ObservedObject var store: ItemStore
     
+    @State private var isNew = true
+    @State private var selectedCategoryLink: String?
+    
     var body: some View {
         List {
             ForEach(store.categories, id: \.self) { category in
-                SidebarRow(category: category,
-                           symbolName: store.symbolName(for: category),
-                           isSelected: store.selectedCategory == category) {
-                    store.selectCategory(category)
+                NavigationLink(
+                    destination: CategoryView(store: store, category: category),
+                    tag: category,
+                    selection: $selectedCategoryLink
+                ) {
+                    Label(category, systemImage: store.symbolName(for: category))
                 }
             }
         }
         .listStyle(SidebarListStyle())
         .onAppear() {
-            print("onAppear: sidebar list")
+            print("onAppear: SidebarList ----------------------------")
+            print("selectedCategoryLink = \(selectedCategoryLink)")
         }
-    }
-
-
-    struct SidebarRow: View {
-        let category: String
-        let symbolName: String
-        let isSelected: Bool
-        let tapAction: () -> Void
-        
-        var body: some View {
-            Label(category, systemImage: symbolName)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture(perform: tapAction)
-                .listRowBackground(rowBackground)
+        .onDisappear() {
+            print("onDisappear: SidebarList ----------------------------")
+            print("selectedCategoryLink = \(selectedCategoryLink)")
         }
-        
-        var rowBackground: some View {
-            ZStack {
-                Color(.secondarySystemBackground)
-                if isSelected {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(.systemFill))
-                }
-            }
-        }
+        .onChange(of: selectedCategoryLink, perform: { value in
+            print("selectedCategoryLink = \(value)")
+        })
     }
 }
 

@@ -13,7 +13,7 @@ struct SupplementalView: View {
     var body: some View {
         Group {
             if let item = store.selectedItem {
-                ItemView(item: item)
+                ItemView(store: store, item: item)
             }
             else {
                 Text("Select an item")
@@ -21,18 +21,29 @@ struct SupplementalView: View {
             }
         }
         .onAppear() {
-            print("onAppear: SupplementalView")
+            print("onAppear: SupplementalView 2️⃣")
+        }
+        .onDisappear() {
+            print("onDisappear: SupplementalView 2️⃣")
         }
     }
 }
 
 struct ItemView: View {
+    @ObservedObject var store: ItemStore
     let item: Item
     
     var body: some View {
         VStack {
             Text("Some information about \(item.name)")
             Spacer()
+        }
+        .onAppear() {
+            print("onAppear: ItemView \(item.name)")
+            store.selectItem(item)
+        }
+        .onDisappear() {
+            print("onDisappear: ItemView \(item.name)")
         }
         .navigationTitle("\(item.name)")
     }

@@ -20,7 +20,10 @@ struct PrimaryView: View {
             }
         }
         .onAppear() {
-            print("onAppear: PrimaryView")
+            print("onAppear: PrimaryView 1️⃣")
+        }
+        .onDisappear() {
+            print("onDisappear: PrimaryView 1️⃣")
         }
     }
 }
@@ -28,57 +31,52 @@ struct PrimaryView: View {
 
 struct CategoryView: View {
     @ObservedObject var store: ItemStore
-
     let category: String
     
+    @State private var firstAppear = true
+    @State private var selectedItemLink: Item?
     var body: some View {
         VStack {
             List {
                 ForEach(store.items(for: category)) { item in
-                    CategoryRow(item: item, isSelected: store.selectedItem == item) {
-                        store.selectItem(withID: item.id)
+//                    let isSelected = selectedItemLink == item || store.selectedItem == item
+                    NavigationLink(
+                        destination: ItemView(store: store, item: item),
+                        tag: item,
+                        selection: $selectedItemLink
+                    ) {
+                        Text(item.name)
+//                            .foregroundColor(isSelected ? Color(.systemBackground) : .primary)
                     }
+//                    .listRowBackground(
+//                        ZStack {
+//                            Color.white
+//                            if isSelected {
+//                                RoundedRectangle(cornerRadius: 8.0)
+//                                    .foregroundColor(.accentColor)
+//                            }
+//                        }
+//                    )
                 }
+            }
+            .listStyle(InsetListStyle())
+            .onAppear() {
+                print("onAppear: CategoryView List ----------------------------")
             }
         }
         .onAppear() {
-            print("onAppear: \(category) ----------------------------")
+            print("onAppear: CategoryView \(category) ----------------------------")
+            print("selectedItemLink = \(selectedItemLink)")
+            store.selectCategory(category)
         }
         .onDisappear() {
-            print("onDisappear: \(category) ----------------------------")
+            print("onDisappear: CategoryView \(category) ----------------------------")
+            print("selectedItemLink = \(selectedItemLink)")
         }
+        .onChange(of: selectedItemLink, perform: { value in
+            print("selectedItemLink = \(value)")
+        })
         .navigationBarTitle(category)
-    }
-
-    struct CategoryRow: View {
-        let item: Item
-        let isSelected: Bool
-        let tapAction: () -> Void
-        
-        var body: some View {
-            Text(item.name)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture(perform: tapAction)
-                .listRowBackground(rowBackground)
-                .overlay(selectionChevron, alignment: .trailing)
-                .foregroundColor(isSelected ? .white : .primary)
-        }
-
-        @ViewBuilder
-        var rowBackground: some View {
-            if isSelected {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.accentColor)
-            }
-        }
-        
-        @ViewBuilder
-        var selectionChevron: some View {
-            if isSelected {
-                Image(systemName: "chevron.right")
-            }
-        }
     }
 }
 

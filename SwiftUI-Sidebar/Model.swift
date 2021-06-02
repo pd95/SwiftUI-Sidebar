@@ -29,10 +29,10 @@ struct Item: Identifiable, Hashable{
 
 class ItemStore: ObservableObject {
     
-    @Published var allItems: [ItemType: [Item]]
+    @Published private(set) var allItems: [ItemType: [Item]]
    
-    @Published var selectedCategory: String?
-    @Published var selectedItem: Item?
+    @Published private(set) var selectedCategory: String?
+    @Published private(set) var selectedItem: Item?
 
     init() {
         allItems = [
@@ -73,17 +73,22 @@ class ItemStore: ObservableObject {
         if selectedCategory != name {
             print("removing selected item: \(selectedItem)")
             selectedItem = nil
+            selectedCategory = name
         }
-        selectedCategory = name
     }
 
-    func selectItem(withID id: Item.ID) {
-        print("selecting item: \(id)")
-        selectedItem = items(for: selectedCategory ?? "").first(where: { $0.id == id })
+    func selectItem(_ item: Item?) {
+        print("selecting item: \(item?.id)")
+        if selectedItem != item {
+            selectedItem = item
+        }
     }
     
     func selectItem(_ name: String) {
         print("selecting item: \(name)")
-        selectedItem = items(for: selectedCategory ?? "").first(where: { $0.name == name })
+        let newItem = items(for: selectedCategory ?? "").first(where: { $0.name == name })
+        if newItem != selectedItem {
+            selectedItem = newItem
+        }
     }
 }
