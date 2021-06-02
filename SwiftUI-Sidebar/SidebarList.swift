@@ -67,7 +67,7 @@ struct SidebarList_Previews: PreviewProvider {
             SidebarList(store: store)
             Text("Primary view")
         }
-        .previewLayout(.fixed(width: 1024, height: 768))
+        .previewLayout(.fixed(width: 1195, height: 700))
         //.navigationViewStyle(StackNavigationViewStyle())
     }
 }

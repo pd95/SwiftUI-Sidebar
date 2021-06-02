@@ -95,5 +95,6 @@ struct PrimaryView_Previews: PreviewProvider {
             PrimaryView(store: store)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .previewLayout(.fixed(width: 500, height: 700))
     }
 }
