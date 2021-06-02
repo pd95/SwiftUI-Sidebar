@@ -60,9 +60,24 @@ struct CategoryView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture(perform: tapAction)
-                .listRowBackground(SelectedListItemBackground(isSelected: isSelected))
-                .overlay(SelectedListItemOverlay(isSelected: isSelected), alignment: .trailing)
+                .listRowBackground(rowBackground)
+                .overlay(selectionChevron, alignment: .trailing)
                 .foregroundColor(isSelected ? .white : .primary)
+        }
+
+        @ViewBuilder
+        var rowBackground: some View {
+            if isSelected {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.accentColor)
+            }
+        }
+        
+        @ViewBuilder
+        var selectionChevron: some View {
+            if isSelected {
+                Image(systemName: "chevron.right")
+            }
         }
     }
 }

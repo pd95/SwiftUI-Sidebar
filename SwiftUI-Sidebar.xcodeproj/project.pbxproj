@@ -11,7 +11,6 @@
 		179C9DD02655B49300373CF9 /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DCF2655B49300373CF9 /* SidebarList.swift */; };
 		179C9DD22655B5B800373CF9 /* PrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD12655B5B800373CF9 /* PrimaryView.swift */; };
 		179C9DD42655B6A000373CF9 /* SupplementalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD32655B6A000373CF9 /* SupplementalView.swift */; };
-		179C9DD62655B89C00373CF9 /* ListRowHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD52655B89C00373CF9 /* ListRowHelper.swift */; };
 		17AAC5A02651384800233118 /* SwiftUI_SidebarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AAC59F2651384800233118 /* SwiftUI_SidebarApp.swift */; };
 		17AAC5A22651384800233118 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AAC5A12651384800233118 /* ContentView.swift */; };
 		17AAC5A42651384900233118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17AAC5A32651384900233118 /* Assets.xcassets */; };
@@ -23,7 +22,6 @@
 		179C9DCF2655B49300373CF9 /* SidebarList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarList.swift; sourceTree = "<group>"; };
 		179C9DD12655B5B800373CF9 /* PrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryView.swift; sourceTree = "<group>"; };
 		179C9DD32655B6A000373CF9 /* SupplementalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementalView.swift; sourceTree = "<group>"; };
-		179C9DD52655B89C00373CF9 /* ListRowHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowHelper.swift; sourceTree = "<group>"; };
 		179C9DD82655BBF900373CF9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		17AAC59C2651384800233118 /* SwiftUI-Sidebar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Sidebar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AAC59F2651384800233118 /* SwiftUI_SidebarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_SidebarApp.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 				179C9DCF2655B49300373CF9 /* SidebarList.swift */,
 				179C9DD12655B5B800373CF9 /* PrimaryView.swift */,
 				179C9DD32655B6A000373CF9 /* SupplementalView.swift */,
-				179C9DD52655B89C00373CF9 /* ListRowHelper.swift */,
 				179C9DCD26554CE500373CF9 /* Model.swift */,
 				17AAC5A32651384900233118 /* Assets.xcassets */,
 				17AAC5A82651384900233118 /* Info.plist */,
@@ -157,7 +154,6 @@
 			files = (
 				179C9DD42655B6A000373CF9 /* SupplementalView.swift in Sources */,
 				179C9DCE26554CE500373CF9 /* Model.swift in Sources */,
-				179C9DD62655B89C00373CF9 /* ListRowHelper.swift in Sources */,
 				17AAC5A22651384800233118 /* ContentView.swift in Sources */,
 				179C9DD02655B49300373CF9 /* SidebarList.swift in Sources */,
 				17AAC5A02651384800233118 /* SwiftUI_SidebarApp.swift in Sources */,
