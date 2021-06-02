@@ -8,11 +8,11 @@ There are various examples and blog posts available on the web, but most of them
 The goal for my example project was to:
 
 - have a sidebar, remembering its current selection and highlighting it accordingly
-- content is a regular Master/Detail resp. Primary/Supplemental view, also remembering the current list selection
+- content is a regular Master/Detail respectively Primary/Supplemental view, also remembering the current list selection
 
 These seem rather basic goals, but most of them are not easily achieved with the examples and blog posts I've found so far.
 
-The basic setup of a three column split view is created as follows:
+The basic setup of a three column split view is created as shown below:
 
 ```swift
 NavigationView {
@@ -25,16 +25,24 @@ NavigationView {
 Whenever a list row is selected from the sidebar, this influences the content of the primary view.  
 When a list entry in the primary view is selected, this will influence the content of the supplemental view.
 
+**Warning**: After recent changes I have retested the app in various conditions on iPad (12") and iPhone and have to admit: 
+The app is broken in the current state. It will worke nicely on iPad with all at least two views visible. 
+But navigation does not work if there is only one of the views on screen. The removal of the `NavigationView` from `SidebarList`
+and `PrimaryView` was definitely wrong.
+
+**The conclusions highlighted below are very probably wrong.  
+It seems as if I'm back in the state of: I have nothing understood.**
+
 ## The problems
 
 During the implementation, I've hit the following problems and had to find appropriate solutions.
 
-1. List selection is not easily remembered: `AppStorage` does not support optional types (which are in general
-   used by `NavigationLink`s `selection` parameter to remember the currently selected entry)
+1. List selection is not easily remembered: `AppStorage` and `SceneStorage` do not support optional types (which are
+   used by `NavigationLink`s `selection` parameter to remember the currently selected entry).
 
 2. A programmatically triggered `NavigationLink` (i.e. setting the `selection` to the correct `tag`) will trigger the 
     display of the destination view, but it will not highlight the row/link as selected.  
-    The programmatically selected sidebar entry will not be displayed as long as the sidebar is shown by the user.
+    The programmatically selected sidebar entry will not be displayed as long as the sidebar is not shown by the user.
     (e.g. on an iPhone and 11" iPad the sidebar is hidden by default!)
 
 3. Especially disturbing: the initially displayed `PrimaryView` and `SupplementalView` are treated as placeholders and are
@@ -43,6 +51,7 @@ During the implementation, I've hit the following problems and had to find appro
 
 4. I have not found a modifier to set a list row to "selected" or "highlighted", even though the regular lists do support
     selection/highlighting when the corresponding `NavigationLink` is tapped by the user.
+    You have to handle drawing the selection (e.g. the highlighted background) yourself.
 
 5. Selecting a different Primary view will not automatically invalidate/clear the supplemental view. 
 
@@ -54,8 +63,10 @@ During the implementation, I've hit the following problems and had to find appro
 1. **Do not use `NavigationLink` to change the views displayed in the primary view and supplemental view.**  
 
     First: the `NavigationLink` cannot be used to properly track the selected item within the list due to the fact that the
-    `tag:,selection:` arguments resp. the `isActive:` is mainly used to animate the navigation to a detail view respectively
-    away from the detail view. Therefore I've introduces `selectedCategory` and `selectedItem` in my model. They are set
+    `tag:,selection:` arguments respectively the `isActive:` is mainly used to animate the navigation to a detail view respectively
+    away from the detail view. Under some circumstances those bindings are set to `null` and therefore the selection 
+    is mysteriously cleared. But we want that the selection persists!  
+    Therefore I've introduced `selectedCategory` and `selectedItem` in my model. They are set
     whenever a tap action happens on the list row.  
     This means: I have used regular `Text` views with `onTapGesture` gesture recognisers to detect tapping on a list row.
     
@@ -76,5 +87,5 @@ During the implementation, I've hit the following problems and had to find appro
 
 4. **It is not possible to switch between three column split view and two column split view.**
 
-    If you want three column mode, you will have to provide 3 child views to `NavigationView`. Conditionnally omitting the
+    If you want three column mode, you will have to provide 3 child views to `NavigationView`. Conditionally omitting the
     third view will not change the layout. There will simply be a missing supplemental view!
