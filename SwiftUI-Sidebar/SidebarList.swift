@@ -14,7 +14,9 @@ struct SidebarList: View {
     var body: some View {
         List {
             ForEach(store.categories, id: \.self) { category in
-                SidebarRow(category: category, isSelected: store.selectedCategory == category) {
+                SidebarRow(category: category,
+                           symbolName: store.symbolName(for: category),
+                           isSelected: store.selectedCategory == category) {
                     store.selectCategory(category)
                 }
             }
@@ -28,18 +30,26 @@ struct SidebarList: View {
 
     struct SidebarRow: View {
         let category: String
+        let symbolName: String
         let isSelected: Bool
         let tapAction: () -> Void
         
         var body: some View {
-            Text(category)
+            Label(category, systemImage: symbolName)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture(perform: tapAction)
-                // iOS BUG: Cannot modify background of Sidebar list row without breaking it
-                //.listRowBackground(SelectedListItemBackground(isSelected: isSelected))
-                //.foregroundColor(isSelected ? .white : .primary)
-                .overlay(SelectedListItemOverlay(isSelected: isSelected), alignment: .trailing)
+                .listRowBackground(rowBackground)
+        }
+        
+        var rowBackground: some View {
+            ZStack {
+                Color(.secondarySystemBackground)
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color(.systemFill))
+                }
+            }
         }
     }
 }
