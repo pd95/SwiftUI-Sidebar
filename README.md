@@ -7,8 +7,8 @@ There are various examples and blog posts available on the web, but most of them
 
 The goal for my example project was to:
 
-- have a sidebar, remembering its current selection and highlighting it accordingly
-- content is a regular Master/Detail respectively Primary/Supplemental view, also remembering the current list selection
+- have a sidebar, remembering its current selection and highlighting it accordingly (as described by [Apples HIG](https://developer.apple.com/design/human-interface-guidelines/ios/views/split-views/))
+- content is a regular Master/Detail respectively Primary/Secondary view, also remembering the current list selection
 
 These seem rather basic goals, but most of them are not easily achieved with the examples and blog posts I've found so far.
 
@@ -18,12 +18,12 @@ The basic setup of a three column split view is created as shown below:
 NavigationView {
     SidebarList()
     PrimaryView()
-    SupplementalView()
+    SecondaryView()
 }
 ```
 
 Whenever a list row is selected from the sidebar, this influences the content of the primary view.  
-When a list entry in the primary view is selected, this will influence the content of the supplemental view.
+When a list entry in the primary view is selected, this will influence the content of the secondary view.
 
 **Warning**: After recent changes I have retested the app in various conditions on iPad (12") and iPhone and have to admit: 
 The app is broken in the current state. It will worke nicely on iPad with all at least two views visible. 
@@ -45,7 +45,7 @@ During the implementation, I've hit the following problems and had to find appro
     The programmatically selected sidebar entry will not be displayed as long as the sidebar is not shown by the user.
     (e.g. on an iPhone and 11" iPad the sidebar is hidden by default!)
 
-3. Especially disturbing: the initially displayed `PrimaryView` and `SupplementalView` are treated as placeholders and are
+3. Especially disturbing: the initially displayed `PrimaryView` and `SecondaryView` are treated as placeholders and are
     **replaced/overwritten** even though a user clicks the exact same rows which correspond to the content of those views.
     (=a `onDisappear` and a fresh `onAppear` is triggered.)
 

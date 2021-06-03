@@ -1,5 +1,5 @@
 //
-//  SupplementalView.swift
+//  SecondaryView.swift
 //  SwiftUI-Sidebar
 //
 //  Created by Philipp on 19.05.21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SupplementalView: View {
+struct SecondaryView: View {
     @EnvironmentObject var store: ItemStore
 
     @AppStorage("selectedItem") private var selectedItem: String?
@@ -25,10 +25,10 @@ struct SupplementalView: View {
             }
         }
         .onAppear() {
-            print("onAppear: SupplementalView 2️⃣")
+            print("onAppear: SecondaryView 2️⃣")
         }
         .onDisappear() {
-            print("onDisappear: SupplementalView 2️⃣")
+            print("onDisappear: SecondaryView 2️⃣")
         }
     }
 }
@@ -53,7 +53,7 @@ struct ItemView: View {
 }
 
 
-struct SupplementalView_Previews: PreviewProvider {
+struct SecondaryView_Previews: PreviewProvider {
     @AppStorage("selectedCategory") static private var selectedCategory: String?
     @AppStorage("selectedItem") static private var selectedItem: String?
 
@@ -64,7 +64,7 @@ struct SupplementalView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             Text("Master")
-            SupplementalView()
+            SecondaryView()
         }
         .environmentObject(store)
         .onAppear() {

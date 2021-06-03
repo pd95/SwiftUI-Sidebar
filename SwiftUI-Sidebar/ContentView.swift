@@ -34,12 +34,12 @@ struct ContentView: View {
                         print("1️⃣ PrimaryView off screen")
                     })
 
-                SupplementalView()
+                SecondaryView()
                     .onAppear(perform: {
-                        print("2️⃣ SupplementalView on screen")
+                        print("2️⃣ SecondaryView on screen")
                     })
                     .onDisappear(perform: {
-                        print("2️⃣ SupplementalView off screen")
+                        print("2️⃣ SecondaryView off screen")
                     })
             }
             
