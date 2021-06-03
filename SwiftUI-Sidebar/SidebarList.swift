@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SidebarList: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var store: ItemStore
     
     @AppStorage("selectedCategory") private var selectedCategory: String?
@@ -17,7 +16,7 @@ struct SidebarList: View {
     var body: some View {
         List {
             ForEach(store.categories, id: \.self) { category in
-                if horizontalSizeClass == .compact {
+                if store.screenIsCompact {
                     // Intead of this nice and simple NavigationLink:
                     NavigationLink(
                         destination: CategoryView(category: category),
@@ -50,6 +49,7 @@ struct SidebarList: View {
         
         // Propagate change of selection to navigation link
         .onChange(of: selectedCategory, perform: { value in
+            print("SidebarList>  selectedCategory = \(selectedCategory) >> \(value)")
             activatedNavigationLink = selectedCategory
         })
         .navigationTitle("Categories")

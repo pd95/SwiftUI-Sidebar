@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
 
-            if horizontalSizeClass == .compact {
+            if store.screenIsCompact {
                 // single column mode
                 SidebarList()
             }
@@ -50,6 +50,8 @@ struct ContentView: View {
             print("onAppear: ContentView AppStorage State:")
             print(">  selectedCategory = \(selectedCategory)")
             print(">  selectedItem = \(selectedItem)")
+            print(">  horizontalSizeClass = \(horizontalSizeClass)")
+            store.screenIsCompact = horizontalSizeClass == .compact
         }
         .onChange(of: selectedCategory, perform: { value in
             print(">  selectedCategory = \(selectedCategory) >> \(value)")

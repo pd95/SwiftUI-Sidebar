@@ -22,7 +22,8 @@ struct PrimaryView: View {
             }
         }
         .onAppear() {
-            print("onAppear: PrimaryView 1️⃣")
+            print("onAppear: PrimaryView 1️⃣ AppStorage State:")
+            print(">  selectedCategory = \(selectedCategory)")
         }
         .onDisappear() {
             print("onDisappear: PrimaryView 1️⃣")
@@ -32,7 +33,6 @@ struct PrimaryView: View {
 
 
 struct CategoryView: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var store: ItemStore
     let category: String
     
@@ -44,7 +44,7 @@ struct CategoryView: View {
             List {
                 ForEach(store.items(for: category)) { item in
                 
-                    if horizontalSizeClass == .compact {
+                    if store.screenIsCompact {
                         // Intead of this nice and simple NavigationLink:
                         NavigationLink(
                             destination: ItemView(item: item),
@@ -86,7 +86,7 @@ struct CategoryView: View {
             .onAppear() {
                 print("onAppear: CategoryView List ----------------------------")
                 // Restore previous selection
-                if horizontalSizeClass == .regular {
+                if !store.screenIsCompact {
                     if let selectedItem = selectedItem {
                         print("  navigating to \(selectedItem)")
                         activatedNavigationLink = selectedItem
@@ -109,6 +109,10 @@ struct CategoryView: View {
                 selectedItem = newValue
             }
         })
+        .onAppear() {
+            print("onAppear: CategoryView AppStorage State:")
+            print(">  selectedItem = \(selectedItem)")
+        }
         .navigationBarTitle(category)
     }
     
