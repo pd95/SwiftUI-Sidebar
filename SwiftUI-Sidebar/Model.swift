@@ -29,11 +29,9 @@ struct Item: Identifiable, Hashable{
 
 class ItemStore: ObservableObject {
     
-    @Published var allItems: [ItemType: [Item]]
+    @Published private(set) var allItems: [ItemType: [Item]]
+    @Published var screenIsCompact = true
    
-    @Published var selectedCategory: String?
-    @Published var selectedItem: Item?
-
     init() {
         allItems = [
             .book:    (1...7).map { Item(type: .book, name: "Book \($0)") },
@@ -67,23 +65,12 @@ class ItemStore: ObservableObject {
         let itemType = ItemType(rawValue: category) ?? .undefined
         return allItems[itemType, default: []]
     }
-    
-    func selectCategory(_ name: String) {
-        print("selecting category: \(name)")
-        if selectedCategory != name {
-            print("removing selected item: \(selectedItem)")
-            selectedItem = nil
-        }
-        selectedCategory = name
-    }
-
-    func selectItem(withID id: Item.ID) {
-        print("selecting item: \(id)")
-        selectedItem = items(for: selectedCategory ?? "").first(where: { $0.id == id })
-    }
-    
-    func selectItem(_ name: String) {
-        print("selecting item: \(name)")
-        selectedItem = items(for: selectedCategory ?? "").first(where: { $0.name == name })
+   
+    func item(named name: String) -> Item? {
+        let x = allItems.values.reduce([Item](), { r, a in
+            let element = a.filter({$0.name == name})
+            return r + element
+        }).first
+        return x
     }
 }
