@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct SupplementalView: View {
-    @ObservedObject var store: ItemStore
-    
+    @EnvironmentObject var store: ItemStore
+
+    @AppStorage("selectedItem") private var selectedItem: String?
+
     var body: some View {
         Group {
-            if let item = store.selectedItem {
-                ItemView(store: store, item: item)
+            if let selectedItem = selectedItem,
+               let item = store.item(named: selectedItem)
+            {
+                ItemView(item: item)
             }
             else {
                 Text("Select an item")
@@ -30,7 +34,7 @@ struct SupplementalView: View {
 }
 
 struct ItemView: View {
-    @ObservedObject var store: ItemStore
+    @EnvironmentObject var store: ItemStore
     let item: Item
     
     var body: some View {
@@ -40,7 +44,6 @@ struct ItemView: View {
         }
         .onAppear() {
             print("onAppear: ItemView \(item.name)")
-            store.selectItem(item)
         }
         .onDisappear() {
             print("onDisappear: ItemView \(item.name)")
@@ -51,16 +54,22 @@ struct ItemView: View {
 
 
 struct SupplementalView_Previews: PreviewProvider {
+    @AppStorage("selectedCategory") static private var selectedCategory: String?
+    @AppStorage("selectedItem") static private var selectedItem: String?
+
     static let store: ItemStore = {
         let store = ItemStore()
-        store.selectCategory("Games")
-        store.selectItem("Game 3")
         return store
     }()
     static var previews: some View {
         NavigationView {
             Text("Master")
-            SupplementalView(store: store)
+            SupplementalView()
+        }
+        .environmentObject(store)
+        .onAppear() {
+            selectedCategory = "Games"
+            selectedItem = "Game 3"
         }
     }
 }

@@ -31,9 +31,6 @@ class ItemStore: ObservableObject {
     
     @Published private(set) var allItems: [ItemType: [Item]]
    
-    @Published private(set) var selectedCategory: String?
-    @Published private(set) var selectedItem: Item?
-
     init() {
         allItems = [
             .book:    (1...7).map { Item(type: .book, name: "Book \($0)") },
@@ -67,28 +64,12 @@ class ItemStore: ObservableObject {
         let itemType = ItemType(rawValue: category) ?? .undefined
         return allItems[itemType, default: []]
     }
-    
-    func selectCategory(_ name: String) {
-        print("selecting category: \(name)")
-        if selectedCategory != name {
-            print("removing selected item: \(selectedItem)")
-            selectedItem = nil
-            selectedCategory = name
-        }
-    }
-
-    func selectItem(_ item: Item?) {
-        print("selecting item: \(item?.id)")
-        if selectedItem != item {
-            selectedItem = item
-        }
-    }
-    
-    func selectItem(_ name: String) {
-        print("selecting item: \(name)")
-        let newItem = items(for: selectedCategory ?? "").first(where: { $0.name == name })
-        if newItem != selectedItem {
-            selectedItem = newItem
-        }
+   
+    func item(named name: String) -> Item? {
+        let x = allItems.values.reduce([Item](), { r, a in
+            let element = a.filter({$0.name == name})
+            return r + element
+        }).first
+        return x
     }
 }

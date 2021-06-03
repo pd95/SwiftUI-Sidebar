@@ -9,41 +9,54 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @StateObject private var store = ItemStore()
+    
+    @AppStorage("selectedCategory") private var selectedCategory: String?
+    @AppStorage("selectedItem") private var selectedItem: String?
 
-    // BUG: AppStorage does not support Optional types therefore it cannot be used to remember list selection?!
-    @AppStorage("selectedCategory") private var selectedCategory: String = ""
-    @AppStorage("selectedItem") private var selectedItem: String = ""
-        
     var body: some View {
         NavigationView {
-            SidebarList(store: store)
 
-            PrimaryView(store: store)
+            if horizontalSizeClass == .compact {
+                // single column mode
+                SidebarList()
+            }
+            else {
+                // three column mode
+                SidebarList()
+
+                PrimaryView()
+                    .onAppear(perform: {
+                        print("1️⃣ PrimaryView on screen")
+                    })
+                    .onDisappear(perform: {
+                        print("1️⃣ PrimaryView off screen")
+                    })
+
+                SupplementalView()
+                    .onAppear(perform: {
+                        print("2️⃣ SupplementalView on screen")
+                    })
+                    .onDisappear(perform: {
+                        print("2️⃣ SupplementalView off screen")
+                    })
+            }
             
-            SupplementalView(store: store)
         }
+        .environmentObject(store)
         //.navigationViewStyle(DoubleColumnNavigationViewStyle())
-        
-        // Here we synchronize our model state with AppStorage ==> Better use UserDefaults in the first place?!
-        .onChange(of: store.selectedCategory, perform: { newSelection in
-            print("AppStorage sync: new selectedCategory = \(newSelection ?? "-")")
-            if let newSelection = newSelection {
-                selectedCategory = newSelection
-            }
-        })
-        .onChange(of: store.selectedItem, perform: { newSelection in
-            print("AppStorage sync: new selectedItem = \(newSelection?.name ?? "-")")
-            if let newSelection = newSelection {
-                selectedItem = newSelection.name
-            }
-        })
-        // Sync AppStorage values with model data
         .onAppear() {
-            print("onAppear: NavigationView restoring AppStorage")
-            store.selectCategory(selectedCategory)
-            store.selectItem(selectedItem)
+            print("onAppear: ContentView AppStorage State:")
+            print(">  selectedCategory = \(selectedCategory)")
+            print(">  selectedItem = \(selectedItem)")
         }
+        .onChange(of: selectedCategory, perform: { value in
+            print(">  selectedCategory = \(selectedCategory) >> \(value)")
+        })
+        .onChange(of: selectedItem, perform: { value in
+            print(">  selectedItem = \(selectedItem) >> \(value)")
+        })
     }
 }
 

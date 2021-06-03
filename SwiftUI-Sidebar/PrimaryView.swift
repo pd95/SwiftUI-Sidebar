@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct PrimaryView: View {
-    @ObservedObject var store: ItemStore
+    @EnvironmentObject var store: ItemStore
     
+    @AppStorage("selectedCategory") private var selectedCategory: String?
+
     var body: some View {
         Group {
-            if let category = store.selectedCategory {
-                CategoryView(store: store, category: category)
+            if let category = selectedCategory{
+                CategoryView(category: category)
             }
             else {
                 Text("Select a category")
@@ -30,67 +32,115 @@ struct PrimaryView: View {
 
 
 struct CategoryView: View {
-    @ObservedObject var store: ItemStore
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @EnvironmentObject var store: ItemStore
     let category: String
     
-    @State private var firstAppear = true
-    @State private var selectedItemLink: Item?
+    @AppStorage("selectedItem") private var selectedItem: String?
+    @State private var activatedNavigationLink: String?
+    
     var body: some View {
         VStack {
             List {
                 ForEach(store.items(for: category)) { item in
-//                    let isSelected = selectedItemLink == item || store.selectedItem == item
-                    NavigationLink(
-                        destination: ItemView(store: store, item: item),
-                        tag: item,
-                        selection: $selectedItemLink
-                    ) {
-                        Text(item.name)
-//                            .foregroundColor(isSelected ? Color(.systemBackground) : .primary)
+                
+                    if horizontalSizeClass == .compact {
+                        // Intead of this nice and simple NavigationLink:
+                        NavigationLink(
+                            destination: ItemView(item: item),
+                            tag: item.name,
+                            selection: $selectedItem
+                        ) {
+                            Text(item.name)
+                        }
+
                     }
-//                    .listRowBackground(
-//                        ZStack {
-//                            Color.white
-//                            if isSelected {
-//                                RoundedRectangle(cornerRadius: 8.0)
-//                                    .foregroundColor(.accentColor)
-//                            }
-//                        }
-//                    )
+                    else {
+                        // We have to use something completely custom:
+                        let isSelected = selectedItem == item.name
+                        Button(action: {
+                            selectedItem = item.name
+                        }) {
+                            Text(item.name)
+                                .foregroundColor(isSelected ? Color(.systemBackground) : .primary)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                        }
+                        // Use PlainButtonStyle: with the least disturbing UI effects when pressed
+                        .buttonStyle(PlainButtonStyle())
+
+                        .listRowBackground(
+                            ZStack {
+                                Color(.systemBackground)
+                                if isSelected {
+                                    RoundedRectangle(cornerRadius: 12.0)
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+                            .background(navigationLink(for: item))
+                        )
+                    }
                 }
             }
             .listStyle(InsetListStyle())
             .onAppear() {
                 print("onAppear: CategoryView List ----------------------------")
+                // Restore previous selection
+                if horizontalSizeClass == .regular {
+                    if let selectedItem = selectedItem {
+                        print("  navigating to \(selectedItem)")
+                        activatedNavigationLink = selectedItem
+                    }
+                }
             }
         }
-        .onAppear() {
-            print("onAppear: CategoryView \(category) ----------------------------")
-            print("selectedItemLink = \(selectedItemLink)")
-            store.selectCategory(category)
-        }
-        .onDisappear() {
-            print("onDisappear: CategoryView \(category) ----------------------------")
-            print("selectedItemLink = \(selectedItemLink)")
-        }
-        .onChange(of: selectedItemLink, perform: { value in
-            print("selectedItemLink = \(value)")
+
+        // Propagate change of selection to navigation link
+        .onChange(of: selectedItem, perform: { value in
+            print("selectedItem = \(value)")
+            if value != activatedNavigationLink {
+                activatedNavigationLink = value
+            }
+        })
+        // Propagate change on navigation link to selection
+        .onChange(of: activatedNavigationLink, perform: { value in
+            print("activatedNavigationLink = \(value)")
+            if let newValue = value, newValue != selectedItem {
+                selectedItem = newValue
+            }
         })
         .navigationBarTitle(category)
+    }
+    
+    func navigationLink(for item: Item) -> some View {
+        NavigationLink(
+            destination: ItemView(item: item),
+            tag: item.name,
+            selection: $activatedNavigationLink,
+            label: {
+                EmptyView()
+            }
+        )
     }
 }
 
 
 struct PrimaryView_Previews: PreviewProvider {
+    @AppStorage("selectedCategory") static private var selectedCategory: String?
+    @AppStorage("selectedItem") static private var selectedItem: String?
+
     static let store: ItemStore = {
         let store = ItemStore()
-        store.selectCategory("Games")
-        store.selectItem("Game 3")
         return store
     }()
     static var previews: some View {
         NavigationView {
-            PrimaryView(store: store)
+            PrimaryView()
+        }
+        .environmentObject(store)
+        .onAppear() {
+            selectedCategory = "Games"
+            selectedItem = "Game 3"
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .previewLayout(.fixed(width: 500, height: 700))
