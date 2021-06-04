@@ -43,7 +43,6 @@ struct CategoryView: View {
         VStack {
             List {
                 ForEach(store.items(for: category)) { item in
-                
                     if store.screenIsCompact {
                         // Intead of this nice and simple NavigationLink:
                         NavigationLink(
@@ -53,7 +52,6 @@ struct CategoryView: View {
                         ) {
                             Text(item.name)
                         }
-
                     }
                     else {
                         // We have to use something completely custom:
@@ -68,17 +66,8 @@ struct CategoryView: View {
                         // Use PlainButtonStyle: with the least disturbing UI effects when pressed
                         .buttonStyle(PlainButtonStyle())
 
-                        .listRowBackground(
-                            ZStack {
-                                Styling.listBackgroundColor
-                                if isSelected {
-                                    RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
-                                        .foregroundColor(.accentColor)
-                                }
-                            }
-                            .onTapGesture(perform: { selectItem(item) })
-                            .background(navigationLink(for: item))
-                        )
+                        // Use custom row background to handle selection incl. NavigationLink
+                        .listRowBackground(rowBackground(for: item, isSelected: isSelected))
                     }
                 }
             }
@@ -116,15 +105,27 @@ struct CategoryView: View {
         .navigationTitle(category)
     }
     
-    func navigationLink(for item: Item) -> some View {
-        NavigationLink(
-            destination: ItemView(item: item),
-            tag: item.name,
-            selection: $activatedNavigationLink,
-            label: {
-                EmptyView()
+    func rowBackground(for item: Item, isSelected: Bool) -> some View {
+        ZStack {
+            Styling.listBackgroundColor
+            if isSelected {
+                RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
+                    .foregroundColor(.accentColor)
             }
-        )
+        }
+        .onTapGesture(perform: { selectItem(item) })
+        .background(Group {
+            #if os(iOS)
+            NavigationLink(
+                destination: ItemView(item: item),
+                tag: item.name,
+                selection: $activatedNavigationLink,
+                label: {
+                    EmptyView()
+                }
+            )
+            #endif
+        })
     }
     
     private func selectItem(_ item: Item) {

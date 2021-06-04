@@ -32,6 +32,7 @@ struct SidebarList: View {
                     Button(action: { selectCategory(category) }) {
                         Label(category, systemImage: store.symbolName(for: category))
                             //.foregroundColor(isSelected ? Styling.sidebarSelectionForegroundColor : .primary)
+                            .padding(.leading, OperatingSystem.current == .macOS ? 8 : 0)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
                     }
