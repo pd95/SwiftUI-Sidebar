@@ -25,6 +25,12 @@ NavigationView {
 Whenever a list row is selected from the sidebar, this influences the content of the primary view.  
 When a list entry in the primary view is selected, this will influence the content of the secondary view.
 
+
+<a href="_resources/macOS.png" target="_blank" ><img src="_resources/macOS.png" style="max-width:50%"/></a>
+<a href="_resources/iPadOS.gif" target="_blank" ><img src="_resources/iPadOS.gif" style="max-width:50%"/></a>
+
+
+
 ## The problems
 
 During the implementation, I've hit the following problems and had to find appropriate solutions.
