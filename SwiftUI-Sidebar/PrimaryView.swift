@@ -62,7 +62,8 @@ struct CategoryView: View {
                             selectedItem = item.name
                         }) {
                             Text(item.name)
-                                .foregroundColor(isSelected ? Color(.systemBackground) : .primary)
+                                .foregroundColor(isSelected ? Styling.selectionForegroundColor : .primary)
+                                .padding(.leading, OperatingSystem.current == .macOS ? 8 : 0)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                                 .contentShape(Rectangle())
                         }
@@ -71,9 +72,9 @@ struct CategoryView: View {
 
                         .listRowBackground(
                             ZStack {
-                                Color(.systemBackground)
+                                Styling.listBackgroundColor
                                 if isSelected {
-                                    RoundedRectangle(cornerRadius: 12.0)
+                                    RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
                                         .foregroundColor(.accentColor)
                                 }
                             }
@@ -113,7 +114,7 @@ struct CategoryView: View {
             print("onAppear: CategoryView AppStorage State:")
             print(">  selectedItem = \(selectedItem)")
         }
-        .navigationBarTitle(category)
+        .navigationTitle(category)
     }
     
     func navigationLink(for item: Item) -> some View {
@@ -146,7 +147,7 @@ struct PrimaryView_Previews: PreviewProvider {
             selectedCategory = "Games"
             selectedItem = "Game 3"
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        //.navigationViewStyle(StackNavigationViewStyle())
         .previewLayout(.fixed(width: 500, height: 700))
     }
 }

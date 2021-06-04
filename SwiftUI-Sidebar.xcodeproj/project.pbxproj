@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1752C9FC266A539F00F4A798 /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DCF2655B49300373CF9 /* SidebarList.swift */; };
+		1752C9FD266A539F00F4A798 /* SecondaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD32655B6A000373CF9 /* SecondaryView.swift */; };
+		1752C9FF266A539F00F4A798 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AAC5A12651384800233118 /* ContentView.swift */; };
+		1752CA00266A539F00F4A798 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE041526696E2600A3A6DA /* Extensions.swift */; };
+		1752CA01266A539F00F4A798 /* PrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD12655B5B800373CF9 /* PrimaryView.swift */; };
+		1752CA02266A539F00F4A798 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DCD26554CE500373CF9 /* Model.swift */; };
+		1752CA04266A53F300F4A798 /* SwiftUI_SidebarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752CA03266A53E600F4A798 /* SwiftUI_SidebarApp.swift */; };
+		1752CA06266A603C00F4A798 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752CA05266A5FCB00F4A798 /* Styling.swift */; };
+		1752CA07266A603D00F4A798 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752CA05266A5FCB00F4A798 /* Styling.swift */; };
 		179C9DCE26554CE500373CF9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DCD26554CE500373CF9 /* Model.swift */; };
 		179C9DD02655B49300373CF9 /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DCF2655B49300373CF9 /* SidebarList.swift */; };
 		179C9DD22655B5B800373CF9 /* PrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C9DD12655B5B800373CF9 /* PrimaryView.swift */; };
@@ -19,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1752C9EC266A51AA00F4A798 /* SwiftUI-Sidebar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Sidebar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1752C9F7266A51AB00F4A798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1752C9F8266A51AB00F4A798 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		1752CA03266A53E600F4A798 /* SwiftUI_SidebarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_SidebarApp.swift; sourceTree = "<group>"; };
+		1752CA05266A5FCB00F4A798 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		179C9DCD26554CE500373CF9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		179C9DCF2655B49300373CF9 /* SidebarList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarList.swift; sourceTree = "<group>"; };
 		179C9DD12655B5B800373CF9 /* PrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryView.swift; sourceTree = "<group>"; };
@@ -34,6 +48,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1752C9E9266A51AA00F4A798 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17AAC5992651384800233118 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,11 +65,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1752C9ED266A51AA00F4A798 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				1752CA03266A53E600F4A798 /* SwiftUI_SidebarApp.swift */,
+				1752C9F7266A51AB00F4A798 /* Info.plist */,
+				1752C9F8266A51AB00F4A798 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
 		17AAC5932651384800233118 = {
 			isa = PBXGroup;
 			children = (
 				179C9DD82655BBF900373CF9 /* README.md */,
 				17AAC59E2651384800233118 /* SwiftUI-Sidebar */,
+				1752C9ED266A51AA00F4A798 /* macOS */,
 				17AAC59D2651384800233118 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				17AAC59C2651384800233118 /* SwiftUI-Sidebar.app */,
+				1752C9EC266A51AA00F4A798 /* SwiftUI-Sidebar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +102,7 @@
 				179C9DCF2655B49300373CF9 /* SidebarList.swift */,
 				179C9DD12655B5B800373CF9 /* PrimaryView.swift */,
 				179C9DD32655B6A000373CF9 /* SecondaryView.swift */,
+				1752CA05266A5FCB00F4A798 /* Styling.swift */,
 				17CE041526696E2600A3A6DA /* Extensions.swift */,
 				179C9DCD26554CE500373CF9 /* Model.swift */,
 				17AAC5A32651384900233118 /* Assets.xcassets */,
@@ -89,9 +123,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		17AAC59B2651384800233118 /* SwiftUI-Sidebar */ = {
+		1752C9EB266A51AA00F4A798 /* App (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17AAC5AB2651384900233118 /* Build configuration list for PBXNativeTarget "SwiftUI-Sidebar" */;
+			buildConfigurationList = 1752C9FB266A51AB00F4A798 /* Build configuration list for PBXNativeTarget "App (macOS)" */;
+			buildPhases = (
+				1752C9E8266A51AA00F4A798 /* Sources */,
+				1752C9E9266A51AA00F4A798 /* Frameworks */,
+				1752C9EA266A51AA00F4A798 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "App (macOS)";
+			productName = "SwiftUI-Sidebar (macOS)";
+			productReference = 1752C9EC266A51AA00F4A798 /* SwiftUI-Sidebar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17AAC59B2651384800233118 /* App (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17AAC5AB2651384900233118 /* Build configuration list for PBXNativeTarget "App (iOS)" */;
 			buildPhases = (
 				17AAC5982651384800233118 /* Sources */,
 				17AAC5992651384800233118 /* Frameworks */,
@@ -101,7 +152,7 @@
 			);
 			dependencies = (
 			);
-			name = "SwiftUI-Sidebar";
+			name = "App (iOS)";
 			productName = "SwiftUI-Sidebar";
 			productReference = 17AAC59C2651384800233118 /* SwiftUI-Sidebar.app */;
 			productType = "com.apple.product-type.application";
@@ -115,6 +166,9 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					1752C9EB266A51AA00F4A798 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					17AAC59B2651384800233118 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -133,12 +187,20 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				17AAC59B2651384800233118 /* SwiftUI-Sidebar */,
+				17AAC59B2651384800233118 /* App (iOS) */,
+				1752C9EB266A51AA00F4A798 /* App (macOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1752C9EA266A51AA00F4A798 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17AAC59A2651384800233118 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,12 +213,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1752C9E8266A51AA00F4A798 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1752CA04266A53F300F4A798 /* SwiftUI_SidebarApp.swift in Sources */,
+				1752CA02266A539F00F4A798 /* Model.swift in Sources */,
+				1752CA07266A603D00F4A798 /* Styling.swift in Sources */,
+				1752CA00266A539F00F4A798 /* Extensions.swift in Sources */,
+				1752C9FC266A539F00F4A798 /* SidebarList.swift in Sources */,
+				1752C9FD266A539F00F4A798 /* SecondaryView.swift in Sources */,
+				1752CA01266A539F00F4A798 /* PrimaryView.swift in Sources */,
+				1752C9FF266A539F00F4A798 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17AAC5982651384800233118 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				179C9DD42655B6A000373CF9 /* SecondaryView.swift in Sources */,
 				179C9DCE26554CE500373CF9 /* Model.swift in Sources */,
+				1752CA06266A603C00F4A798 /* Styling.swift in Sources */,
 				17AAC5A22651384800233118 /* ContentView.swift in Sources */,
 				179C9DD02655B49300373CF9 /* SidebarList.swift in Sources */,
 				17AAC5A02651384800233118 /* SwiftUI_SidebarApp.swift in Sources */,
@@ -168,6 +246,50 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		1752C9F9266A51AB00F4A798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).macOS";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1752C9FA266A51AB00F4A798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).macOS";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		17AAC5A92651384900233118 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -223,6 +345,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.SwiftUI-Sidebar";
+				PRODUCT_NAME = "SwiftUI-Sidebar";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -277,6 +401,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.SwiftUI-Sidebar";
+				PRODUCT_NAME = "SwiftUI-Sidebar";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -291,6 +417,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI-Sidebar/Preview Content\"";
+				DEVELOPMENT_TEAM = P8CC95REUG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI-Sidebar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -298,8 +425,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.SwiftUI-Sidebar";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).iOS";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -312,6 +438,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI-Sidebar/Preview Content\"";
+				DEVELOPMENT_TEAM = P8CC95REUG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "SwiftUI-Sidebar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -319,8 +446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.SwiftUI-Sidebar";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).iOS";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -329,6 +455,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1752C9FB266A51AB00F4A798 /* Build configuration list for PBXNativeTarget "App (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1752C9F9266A51AB00F4A798 /* Debug */,
+				1752C9FA266A51AB00F4A798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		17AAC5972651384800233118 /* Build configuration list for PBXProject "SwiftUI-Sidebar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -338,7 +473,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17AAC5AB2651384900233118 /* Build configuration list for PBXNativeTarget "SwiftUI-Sidebar" */ = {
+		17AAC5AB2651384900233118 /* Build configuration list for PBXNativeTarget "App (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17AAC5AC2651384900233118 /* Debug */,

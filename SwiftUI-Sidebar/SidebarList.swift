@@ -33,7 +33,7 @@ struct SidebarList: View {
                         selectedCategory = category
                     }) {
                         Label(category, systemImage: store.symbolName(for: category))
-                            //.foregroundColor(isSelected ? Color(.secondarysystemBackground) : .primary)
+                            //.foregroundColor(isSelected ? Styling.sidebarSelectionForegroundColor : .primary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
                     }
@@ -58,13 +58,14 @@ struct SidebarList: View {
     func rowBackground(for category: String, isSelected: Bool) -> some View {
         ZStack {
             // Background color for sidebar style:
-            Color(.secondarySystemBackground)
+            Styling.sidebarListBackgroundColor
             if isSelected {
-                RoundedRectangle(cornerRadius: 12.0)
-                    .foregroundColor(Color(.secondarySystemFill))
+                RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
+                    .foregroundColor(Styling.sidebarSelectionBackgroundColor)
             }
         }
-        .background(
+        .background(Group {
+            #if os(iOS)
             NavigationLink(
                 destination: CategoryView(category: category),
                 tag: category,
@@ -73,7 +74,8 @@ struct SidebarList: View {
                     EmptyView()
                 }
             )
-        )
+            #endif
+        })
     }
 }
 

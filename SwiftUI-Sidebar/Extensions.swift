@@ -24,3 +24,21 @@ extension Binding {
     }
 }
 
+enum OperatingSystem {
+    case macOS
+    case iOS
+    case tvOS
+    case watchOS
+
+    #if os(macOS)
+    static let current = macOS
+    #elseif os(iOS)
+    static let current = iOS
+    #elseif os(tvOS)
+    static let current = tvOS
+    #elseif os(watchOS)
+    static let current = watchOS
+    #else
+    #error("Unsupported platform")
+    #endif
+}

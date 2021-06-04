@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    let isCompact: Bool
+    
     @StateObject private var store = ItemStore()
     
     @AppStorage("selectedCategory") private var selectedCategory: String?
@@ -50,8 +51,7 @@ struct ContentView: View {
             print("onAppear: ContentView AppStorage State:")
             print(">  selectedCategory = \(selectedCategory)")
             print(">  selectedItem = \(selectedItem)")
-            print(">  horizontalSizeClass = \(horizontalSizeClass)")
-            store.screenIsCompact = horizontalSizeClass == .compact
+            store.screenIsCompact = isCompact
         }
         .onChange(of: selectedCategory, perform: { value in
             print(">  selectedCategory = \(selectedCategory) >> \(value)")
@@ -64,7 +64,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(isCompact: false)
             .previewLayout(.fixed(width: 1195, height: 700))
     }
 }

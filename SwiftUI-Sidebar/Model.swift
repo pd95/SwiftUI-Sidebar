@@ -30,7 +30,7 @@ struct Item: Identifiable, Hashable{
 class ItemStore: ObservableObject {
     
     @Published private(set) var allItems: [ItemType: [Item]]
-    @Published var screenIsCompact = true
+    @Published var screenIsCompact = false
    
     init() {
         allItems = [

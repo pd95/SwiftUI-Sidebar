@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct SwiftUI_SidebarApp: App {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-
     var body: some Scene {
         WindowGroup {
-            ContentView(isCompact: horizontalSizeClass == .compact)
+            ContentView(isCompact: false)
         }
     }
 }
