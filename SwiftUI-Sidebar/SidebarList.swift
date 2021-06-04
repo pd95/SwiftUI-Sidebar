@@ -29,9 +29,7 @@ struct SidebarList: View {
                 else {
                     // We have to use something completely custom:
                     let isSelected = selectedCategory == category
-                    Button(action: {
-                        selectedCategory = category
-                    }) {
+                    Button(action: { selectCategory(category) }) {
                         Label(category, systemImage: store.symbolName(for: category))
                             //.foregroundColor(isSelected ? Styling.sidebarSelectionForegroundColor : .primary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -54,7 +52,7 @@ struct SidebarList: View {
         })
         .navigationTitle("Categories")
     }
-
+    
     func rowBackground(for category: String, isSelected: Bool) -> some View {
         ZStack {
             // Background color for sidebar style:
@@ -64,6 +62,7 @@ struct SidebarList: View {
                     .foregroundColor(Styling.sidebarSelectionBackgroundColor)
             }
         }
+        .onTapGesture(perform: { selectCategory(category) })
         .background(Group {
             #if os(iOS)
             NavigationLink(
@@ -76,6 +75,10 @@ struct SidebarList: View {
             )
             #endif
         })
+    }
+
+    private func selectCategory(_ category: String) {
+        selectedCategory = category
     }
 }
 

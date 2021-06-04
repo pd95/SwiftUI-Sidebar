@@ -58,9 +58,7 @@ struct CategoryView: View {
                     else {
                         // We have to use something completely custom:
                         let isSelected = selectedItem == item.name
-                        Button(action: {
-                            selectedItem = item.name
-                        }) {
+                        Button(action: { selectItem(item) }) {
                             Text(item.name)
                                 .foregroundColor(isSelected ? Styling.selectionForegroundColor : .primary)
                                 .padding(.leading, OperatingSystem.current == .macOS ? 8 : 0)
@@ -78,6 +76,7 @@ struct CategoryView: View {
                                         .foregroundColor(.accentColor)
                                 }
                             }
+                            .onTapGesture(perform: { selectItem(item) })
                             .background(navigationLink(for: item))
                         )
                     }
@@ -126,6 +125,10 @@ struct CategoryView: View {
                 EmptyView()
             }
         )
+    }
+    
+    private func selectItem(_ item: Item) {
+        selectedItem = item.name
     }
 }
 
