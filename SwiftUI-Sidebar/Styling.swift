@@ -16,7 +16,6 @@ enum Styling {
     static let selectionBackgroundColor = Color.accentColor
     static let listBackgroundColor = Color(.controlBackgroundColor)
 
-    static let sidebarListBackgroundColor = Color(.windowBackgroundColor)
     static let sidebarSelectionForegroundColor = Color.primary
     static let sidebarSelectionBackgroundColor = Color(.separatorColor)
 
@@ -27,7 +26,6 @@ enum Styling {
     static let selectionBackgroundColor = Color(.systemBackground)
     static let listBackgroundColor = Color(.systemBackground)
     
-    static let sidebarListBackgroundColor = Color(.secondarySystemBackground)
     static let sidebarSelectionForegroundColor = Color.primary
     static let sidebarSelectionBackgroundColor = Color(.secondarySystemFill)
     #endif

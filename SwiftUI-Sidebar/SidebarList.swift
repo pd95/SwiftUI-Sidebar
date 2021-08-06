@@ -56,8 +56,7 @@ struct SidebarList: View {
     
     func rowBackground(for category: String, isSelected: Bool) -> some View {
         ZStack {
-            // Background color for sidebar style:
-            Styling.sidebarListBackgroundColor
+            Color.clear
             if isSelected {
                 RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
                     .foregroundColor(Styling.sidebarSelectionBackgroundColor)
