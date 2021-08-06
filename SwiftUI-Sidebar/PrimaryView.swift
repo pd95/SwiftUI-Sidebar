@@ -107,7 +107,7 @@ struct CategoryView: View {
     
     func rowBackground(for item: Item, isSelected: Bool) -> some View {
         ZStack {
-            Styling.listBackgroundColor
+            Color.clear
             if isSelected {
                 RoundedRectangle(cornerRadius: Styling.selectionRectangleRadius)
                     .foregroundColor(.accentColor)
